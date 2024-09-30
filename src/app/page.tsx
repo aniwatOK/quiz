@@ -36,23 +36,25 @@ const Page = () => {
     .reduce((total, transaction) => total + transaction.amount, 0);
 
   return (
-    <div>
-      <h1>บันทึกข้อมูลรายรับรายจ่าย</h1>
-      <form onSubmit={handleSubmit}>
+    <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px', maxWidth: '600px', margin: 'auto', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+      <h1 style={{ textAlign: 'center', color: '#333' }}>บันทึกข้อมูลรายรับรายจ่าย</h1>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <input
           type="number"
           placeholder="จำนวน"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           required
+          style={{ padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
         />
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           required
+          style={{ padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
         />
-        <select value={type} onChange={(e) => setType(e.target.value as 'income' | 'expense')}>
+        <select value={type} onChange={(e) => setType(e.target.value as 'income' | 'expense')} style={{ padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}>
           <option value="income">รายรับ</option>
           <option value="expense">รายจ่าย</option>
         </select>
@@ -61,20 +63,23 @@ const Page = () => {
           placeholder="โน้ต"
           value={note}
           onChange={(e) => setNote(e.target.value)}
+          style={{ padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
         />
-        <button type="submit">บันทึก</button>
+        <button type="submit" style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#4CAF50', color: 'white', cursor: 'pointer' }}>
+          บันทึก
+        </button>
       </form>
 
-      <h2>รายการที่บันทึก</h2>
-      <ul>
+      <h2 style={{ marginTop: '20px', color: '#333' }}>รายการที่บันทึก</h2>
+      <ul style={{ listStyleType: 'none', padding: '0' }}>
         {transactions.map((transaction, index) => (
-          <li key={index}>
+          <li key={index} style={{ padding: '10px', borderBottom: '1px solid #eee' }}>
             {transaction.date} - {transaction.type === 'income' ? '+' : '-'} {transaction.amount} บาท ({transaction.note})
           </li>
         ))}
       </ul>
 
-      <h2>ยอดรวม</h2>
+      <h2 style={{ marginTop: '20px', color: '#333' }}>ยอดรวม</h2>
       <p>รายรับรวม: {totalIncome} บาท</p>
       <p>รายจ่ายรวม: {totalExpense} บาท</p>
       <p>ยอดสุทธิ: {totalIncome - totalExpense} บาท</p>
